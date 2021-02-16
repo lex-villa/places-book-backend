@@ -80,7 +80,7 @@ const updatePlace = (req, res, next) => {
     const updatedPlace = { ...DUMMY_PLACES.find(p => p.id === placeId) };
     const placeIndex = DUMMY_PLACES.findIndex(p => p.id === placeId);
     updatedPlace.title = title;
-    updatedPlace.description = placeId;
+    updatedPlace.description = description;
 
     DUMMY_PLACES[placeIndex] = updatedPlace;
 
