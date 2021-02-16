@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const placesRoutes = require('./routes/places-routes');
 const usersRoutes = require('./routes/users-routes');
@@ -27,5 +28,18 @@ app.use((error, req, res, next) => {
     res.json({ message: error.message || 'An unknown error accurred!' });
 });
 
+const connectConfig = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+}
 
-app.listen(5000);
+mongoose
+    .connect('mongodb+srv://mr-robot:conpass1@cluster0.xjeaf.mongodb.net/places?retryWrites=true&w=majority', connectConfig)
+    .then(() => {
+        console.log('Database connected :)')
+        app.listen(5000);
+    })
+    .catch((error) => {
+        console.log(error);
+    });
